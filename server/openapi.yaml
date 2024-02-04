@@ -1,0 +1,59 @@
+openapi: 3.0.2
+info:
+  title: MMOME API
+  version: 0.1.0
+paths:
+  /new:
+    post:
+      summary: Create a new game
+      responses:
+        '204':
+          description: A new game has been created
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /guess/{guess}:
+    get:
+      summary: Make a guess
+      parameters:
+        - name: guess
+          description: The guess to make
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A guess has been made
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - correct
+                  - misplaced
+                properties:
+                  correct:
+                    description: How many emojis are in the correct position
+                    type: integer
+                  misplaced:
+                    description: How many emojis are in the solution but in the wrong position
+                    type: integer
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
