@@ -13,7 +13,7 @@ type Clues struct {
 }
 
 func main() {
-	var playable = []rune("🏴💀🔥🎉🚀🤡")
+	var playable = []rune("123456")
 	var guess = make([]rune, 5)
 	var clues Clues
 
